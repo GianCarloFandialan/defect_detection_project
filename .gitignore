@@ -1,0 +1,26 @@
+cat > .gitignore << 'EOF'
+# === Ambiente virtuale Python ===
+env/
+venv/
+.venv/
+
+# === Artefatti del progetto (rigenerabili dalla pipeline) ===
+data/
+svm_defect_detector.yml
+vgg16_defect_detector.h5
+vgg16_defect_detector.keras
+
+# === Cache di Python ===
+__pycache__/
+*.pyc
+*.pyo
+
+# === File di sistema macOS ===
+.DS_Store
+
+# === File temporanei di editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+EOF

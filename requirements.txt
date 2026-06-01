@@ -1,0 +1,8 @@
+# Dipendenze del progetto
+numpy
+matplotlib
+opencv-python
+opencv-contrib-python
+tensorflow
+scikit-learn
+seaborn
