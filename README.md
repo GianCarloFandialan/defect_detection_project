@@ -95,7 +95,7 @@ riproducibili.
 
 ```bash
 git clone https://github.com/GianCarloFandialan/defect_detection_project.git
-cd defect-detection-cv
+cd defect_detection_project
 ```
 
 ### Step 2 — Creare l'ambiente virtuale
