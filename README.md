@@ -4,8 +4,6 @@
 
 **Industrial Quality Control — Defect Detection**
 
-Progetto finale per il corso *Introduction to Computer Vision* — EPICODE Institute of Technology.
-
 Il progetto realizza un sistema di controllo qualità industriale che classifica le immagini di
 piastre metalliche in **good** (senza difetti) o **defect** (con graffi, fori, macchie o crepe),
 e localizza automaticamente la posizione del difetto rilevato. Il progetto mette a confronto, in
@@ -13,8 +11,8 @@ modo affiancato, due approcci end-to-end: una pipeline **classica** di Computer 
 SVM lineare) e una pipeline **deep learning** (VGG16 con fine-tuning), come proposto dal brief
 del corso.
 
-Il tema scelto fra quelli proposti dalla slide 3 del brief è *Industrial Quality Control System
-— Defect Detection*, motivato dalla sua naturalezza come problema di **classificazione binaria**
+Il tema scelto fra quelli proposti dalla slide 3 del brief è _Industrial Quality Control System
+— Defect Detection_, motivato dalla sua naturalezza come problema di **classificazione binaria**
 con metriche standard, abbinato a uno stadio di **localizzazione** del difetto basato su
 tecniche classiche di image processing (binarizzazione di Otsu, operazioni morfologiche e
 analisi delle componenti connesse).
@@ -25,13 +23,13 @@ analisi delle componenti connesse).
 
 Il progetto implementa per intero la pipeline a 5 stadi richiesta dalla slide 4 del brief:
 
-| # | Stadio | Modulo | Tecnica |
-|---|---|---|---|
-| 1 | Data Acquisition & Preprocessing | `01_data_generation.py`, `02_preprocessing.py` | Generazione dataset sintetico, gray-world white balance, median blur, equalizzazione dell'istogramma in HSV |
-| 2 | Feature Engineering / Representation | `03_classical_pipeline.py`, `04_deep_pipeline.py` | HOG (Histograms of Oriented Gradients) + features VGG16 pre-allenate su ImageNet |
-| 3 | Core Logic | `03_classical_pipeline.py`, `04_deep_pipeline.py` | SVM lineare (`cv2.ml.SVM`) + CNN (VGG16 con fine-tuning a due fasi) |
-| 4 | Post-processing | `05_postprocessing.py` | Otsu thresholding + morfologia (opening + closing) + `connectedComponentsWithStats` |
-| 5 | Performance Evaluation | `06_evaluation.py` | Accuracy, Precision, Recall, F1-score, Confusion Matrix, ROC curve |
+| #   | Stadio                               | Modulo                                            | Tecnica                                                                                                     |
+| --- | ------------------------------------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| 1   | Data Acquisition & Preprocessing     | `01_data_generation.py`, `02_preprocessing.py`    | Generazione dataset sintetico, gray-world white balance, median blur, equalizzazione dell'istogramma in HSV |
+| 2   | Feature Engineering / Representation | `03_classical_pipeline.py`, `04_deep_pipeline.py` | HOG (Histograms of Oriented Gradients) + features VGG16 pre-allenate su ImageNet                            |
+| 3   | Core Logic                           | `03_classical_pipeline.py`, `04_deep_pipeline.py` | SVM lineare (`cv2.ml.SVM`) + CNN (VGG16 con fine-tuning a due fasi)                                         |
+| 4   | Post-processing                      | `05_postprocessing.py`                            | Otsu thresholding + morfologia (opening + closing) + `connectedComponentsWithStats`                         |
+| 5   | Performance Evaluation               | `06_evaluation.py`                                | Accuracy, Precision, Recall, F1-score, Confusion Matrix, ROC curve                                          |
 
 ### Struttura del repository
 
@@ -96,7 +94,7 @@ riproducibili.
 ### Step 1 — Clonare il repository
 
 ```bash
-git clone https://github.com/TUO-USERNAME/defect-detection-cv.git
+git clone https://github.com/GianCarloFandialan/defect_detection_project.git
 cd defect-detection-cv
 ```
 
@@ -123,6 +121,7 @@ source env/bin/activate
 ```
 
 > Se Python 3.12 non è disponibile nei pacchetti di default, su Ubuntu:
+>
 > ```bash
 > sudo apt install python3.12 python3.12-venv
 > python3.12 -m venv env
@@ -210,14 +209,14 @@ python src/main.py
 
 Tempi attesi:
 
-| Step | Cosa fa | macOS M3 (GPU) | CPU desktop | Colab T4 GPU |
-|---|---|---|---|---|
-| 1 | Generazione dataset (1000 immagini) | ~30 s | ~30 s | ~30 s |
-| 2 | Demo preprocessing | qualche secondo | qualche secondo | qualche secondo |
-| 3 | Training HOG + SVM | 1-2 min | 1-2 min | 1-2 min |
-| 4 | **Training VGG16** | **~8-15 min** | **20-45 min** | **~5-10 min** |
-| 5 | Demo localizzazione | qualche secondo | qualche secondo | qualche secondo |
-| 6 | Valutazione e confronto | 1-2 min | 1-2 min | 1-2 min |
+| Step | Cosa fa                             | macOS M3 (GPU)  | CPU desktop     | Colab T4 GPU    |
+| ---- | ----------------------------------- | --------------- | --------------- | --------------- |
+| 1    | Generazione dataset (1000 immagini) | ~30 s           | ~30 s           | ~30 s           |
+| 2    | Demo preprocessing                  | qualche secondo | qualche secondo | qualche secondo |
+| 3    | Training HOG + SVM                  | 1-2 min         | 1-2 min         | 1-2 min         |
+| 4    | **Training VGG16**                  | **~8-15 min**   | **20-45 min**   | **~5-10 min**   |
+| 5    | Demo localizzazione                 | qualche secondo | qualche secondo | qualche secondo |
+| 6    | Valutazione e confronto             | 1-2 min         | 1-2 min         | 1-2 min         |
 
 In alternativa si possono eseguire i moduli uno alla volta:
 
@@ -232,40 +231,15 @@ python src/06_evaluation.py
 
 ---
 
-## Colab Workbook Link
-
-Il progetto può essere eseguito anche su **Google Colab** senza alcun setup locale,
-sfruttando la GPU gratuita offerta dalla piattaforma.
-
-> 📓 **Notebook Colab:** [`Defect_Detection_Colab.ipynb`](./Defect_Detection_Colab.ipynb)
-> *(incluso nel repository — aprilo su [colab.research.google.com](https://colab.research.google.com)
-> tramite `File → Carica notebook`)*
-
-Il notebook contiene 28 celle pre-configurate che:
-
-1. Verificano l'ambiente Colab e la disponibilità di TensorFlow/GPU.
-2. Caricano il file zip del progetto direttamente dal tuo computer (in alternativa si può
-   montare Google Drive o clonare il repository da GitHub).
-3. Eseguono l'intera pipeline (moduli 1–6) uno step alla volta, mostrando i grafici di
-   matplotlib direttamente nel notebook.
-4. Permettono di scaricare i modelli addestrati (`.yml` per la SVM, `.keras` per la CNN) sul
-   computer locale al termine.
-
-**Per attivare la GPU su Colab:** `Runtime → Cambia tipo di runtime → Acceleratore hardware:
-GPU → Salva`. Con la T4 gratuita, il training di VGG16 richiede ~5–10 minuti anziché 30+
-minuti su CPU.
-
----
-
 ## Summary of Results
 
 Tutti i numeri riportati qui sotto derivano da un training reale sul dataset sintetico
 generato dal modulo 1 (800 immagini di training, 200 di test, perfettamente bilanciate fra
 le due classi).
 
-| Modello | Accuracy | Precision | Recall | F1-score |
-|---|---|---|---|---|
-| SVM + HOG (linear) | 54.0% | 54.3% | 51.0% | 52.6% |
+| Modello                  | Accuracy   | Precision  | Recall     | F1-score   |
+| ------------------------ | ---------- | ---------- | ---------- | ---------- |
+| SVM + HOG (linear)       | 54.0%      | 54.3%      | 51.0%      | 52.6%      |
 | **CNN VGG16 fine-tuned** | **100.0%** | **100.0%** | **100.0%** | **100.0%** |
 
 **Confusion matrix sul test set (200 campioni, 100 per classe):**
@@ -297,14 +271,14 @@ documentati nel `Technical_Analysis_Document.pdf` (slide 8 del brief).**
 
 ## Librerie utilizzate
 
-| Libreria | Uso nel progetto |
-|---|---|
+| Libreria                 | Uso nel progetto                                            |
+| ------------------------ | ----------------------------------------------------------- |
 | OpenCV (`cv2`, `cv2.ml`) | Image processing, HOG, SVM, morfologia, connectedComponents |
-| TensorFlow / Keras | VGG16 pre-allenato, training, salvataggio modello |
-| scikit-learn | Metriche di classificazione, shuffle deterministico |
-| NumPy | Array e operazioni numeriche sulle immagini |
-| Matplotlib | Visualizzazione grafici, confusion matrix, ROC |
-| Seaborn | Heatmap migliorate per le confusion matrix |
+| TensorFlow / Keras       | VGG16 pre-allenato, training, salvataggio modello           |
+| scikit-learn             | Metriche di classificazione, shuffle deterministico         |
+| NumPy                    | Array e operazioni numeriche sulle immagini                 |
+| Matplotlib               | Visualizzazione grafici, confusion matrix, ROC              |
+| Seaborn                  | Heatmap migliorate per le confusion matrix                  |
 
 La lista completa con le versioni fissate è in `requirements.txt`.
 
@@ -356,9 +330,4 @@ display, sostituire `plt.show()` con `plt.savefig('output.png')` nei singoli mod
 
 ## Autore
 
-**Gian Carlo Fandialan** — EPICODE Institute of Technology — Anno 2, Semestre 2 — corso
-*Introduction to Computer Vision*.
-
-## Licenza
-
-Progetto didattico realizzato per il final exam del corso EPICODE.
+**Gian Carlo Fandialan**
