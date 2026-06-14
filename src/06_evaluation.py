@@ -1,6 +1,6 @@
 """
 MODULO 6 - PERFORMANCE EVALUATION
-Valutazione completa dei due modelli (slide 6) con:
+Valutazione completa dei due modelli con:
     - Accuracy, Precision, Recall, F1-score (sklearn.metrics)
     - Confusion Matrix (seaborn heatmap)
     - ROC curve + AUC (solo per la CNN: la SVM lineare non da' probabilita')
